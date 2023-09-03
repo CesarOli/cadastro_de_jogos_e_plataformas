@@ -23,9 +23,11 @@ def cadastro_de_jogos():
         print('Ano do Lançamento: ', ano_lancamento)
         print('PC selecionado')
         
-        
-  #  else:
-        
+    else:
+        sleep(1)
+        print('Nome do jogo cadastrado: ', nome_do_jogo)
+        print('Ano do Lançamento: ', ano_lancamento)
+        print('"Outros" foi a plataforma selecionada.')
 
 app = QtWidgets.QApplication([])
 cadastro = uic.loadUi('cadastro.ui')
