@@ -18,8 +18,13 @@ def cadastro_de_jogos():
         print('XboX selecionado')
     
     elif cadastro.radioButton_3.isChecked():
+        sleep(1)
+        print('Nome do jogo cadastrado: ', nome_do_jogo)
+        print('Ano do Lançamento: ', ano_lancamento)
+        print('PC selecionado')
         
-    else:
+        
+  #  else:
         
 
 app = QtWidgets.QApplication([])
