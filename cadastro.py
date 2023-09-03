@@ -12,6 +12,10 @@ def cadastro_de_jogos():
         print('PS4/PS5 selecionado.')        
     
     elif cadastro.radioButton_2.isChecked():
+        sleep(1)
+        print('Nome do jogo cadastrado: ', nome_do_jogo)
+        print('Ano do Lançamento: ', ano_lancamento)
+        print('XboX selecionado')
     
     elif cadastro.radioButton_3.isChecked():
         
