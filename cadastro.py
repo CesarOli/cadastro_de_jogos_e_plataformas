@@ -37,9 +37,12 @@ def cadastro_de_jogos():
         sleep(1)
         print('Nome do jogo cadastrado: ', nome_do_jogo)
         print('Ano do Lançamento: ', ano_lancamento)
-        print('"Outros" foi a plataforma selecionada.')
+        print('"Outros" foi a plataforma selecionadagit sta.')
 
-cursor = banco_de_dados.cursor()
+    cursor = banco_de_dados.cursor()
+    inserir_no_SQL = 'INSERT INTO Games (Nome_do_Jogo, Ano_Lancamento, Plataforma) VALUES (%s, %s, %s)'
+    jogos = str(nome_do_jogo)
+
 app = QtWidgets.QApplication([])
 cadastro = uic.loadUi('cadastro.ui')
 cadastro.pushButton.clicked.connect(cadastro_de_jogos)
