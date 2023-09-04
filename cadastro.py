@@ -2,7 +2,14 @@ from PyQt5 import uic, QtWidgets
 import mysql.connector
 from time import sleep
 
-banco_de_dados = mysql.connector.connect()
+banco_de_dados = mysql.connector.connect(
+    
+    host='localhost',
+    user='root',
+    password='SENHA_DESEJADA',
+    database='Estante_Virtual_de_Games_e_Plataformas'
+
+)
 
 def cadastro_de_jogos():
     nome_do_jogo = cadastro.lineEdit.text()
