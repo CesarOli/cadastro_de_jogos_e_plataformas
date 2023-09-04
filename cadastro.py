@@ -39,6 +39,7 @@ def cadastro_de_jogos():
         print('Ano do Lançamento: ', ano_lancamento)
         print('"Outros" foi a plataforma selecionada.')
 
+cursor = banco_de_dados.cursor()
 app = QtWidgets.QApplication([])
 cadastro = uic.loadUi('cadastro.ui')
 cadastro.pushButton.clicked.connect(cadastro_de_jogos)
