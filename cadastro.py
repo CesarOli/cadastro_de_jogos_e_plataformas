@@ -52,7 +52,7 @@ def cadastro_de_jogos():
     cadastro.lineEdit.clear()
     cadastro.lineEdit_2.clear()
     cadastro.radioButton.setChecked(False)
-
+    
 app = QtWidgets.QApplication([])
 cadastro = uic.loadUi('cadastro.ui')
 cadastro.pushButton.clicked.connect(cadastro_de_jogos)
