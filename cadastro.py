@@ -2,6 +2,8 @@ from PyQt5 import uic, QtWidgets
 import mysql.connector
 from time import sleep
 
+banco_de_dados = mysql.connector.connect()
+
 def cadastro_de_jogos():
     nome_do_jogo = cadastro.lineEdit.text()
     ano_lancamento = cadastro.lineEdit_2.text()
@@ -36,11 +38,3 @@ cadastro.pushButton.clicked.connect(cadastro_de_jogos)
 sleep(1.5)
 cadastro.show()
 app.exec()
-
-
-'''create table Games (
-    id INT NOT NULL AUTO_INCREMENT,
-    nome do jogo VARCHAR 
-)
-
-'''
