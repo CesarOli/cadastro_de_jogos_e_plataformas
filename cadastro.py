@@ -57,6 +57,7 @@ def chama_tela_lista_de_jogos():
     tela_lista_de_jogos.show()
 
     cursor = banco_de_dados.cursor()
+    seleciona_a_tabela = "SELECT * FROM  Games"
 
 
     
