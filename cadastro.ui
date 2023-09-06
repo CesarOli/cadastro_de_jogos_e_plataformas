@@ -6,9 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>866</width>
+    <width>798</width>
     <height>510</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <kerning>true</kerning>
+   </font>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -91,9 +96,9 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>50</x>
       <y>80</y>
-      <width>211</width>
+      <width>221</width>
       <height>51</height>
      </rect>
     </property>
@@ -158,20 +163,60 @@
      <string>Outros</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>440</y>
-      <width>80</width>
-      <height>23</height>
+      <x>200</x>
+      <y>430</y>
+      <width>91</width>
+      <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+      <kerning>false</kerning>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(105, 182, 255);</string>
+     <string notr="true">background-color: rgb(104, 99, 255);
+color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>ENVIAR</string>
+     <string>Enviar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>430</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(104, 99, 255);
+color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Listar Jogos</string>
     </property>
    </widget>
   </widget>
@@ -180,7 +225,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>866</width>
+     <width>798</width>
      <height>20</height>
     </rect>
    </property>
