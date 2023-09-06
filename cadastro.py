@@ -60,7 +60,9 @@ def chama_tela_lista_de_jogos():
     seleciona_a_tabela = "SELECT * FROM  Games"
     cursor.execute(seleciona_a_tabela)
     dados_recebidos = cursor.fetchall()
-    print(dados_recebidos)
+
+    tela_lista_de_jogos.tableWidget.setRowCount(len(dados_recebidos))
+    tela_lista_de_jogos.tableWidget.setColumnCount(4)
 
     
 app = QtWidgets.QApplication([])
