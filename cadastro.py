@@ -58,7 +58,7 @@ def chama_tela_lista_de_jogos():
 
     cursor = banco_de_dados.cursor()
     seleciona_a_tabela = "SELECT * FROM  Games"
-
+    cursor.execute(seleciona_a_tabela)
 
     
 app = QtWidgets.QApplication([])
