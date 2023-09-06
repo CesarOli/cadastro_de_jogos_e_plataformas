@@ -53,14 +53,18 @@ def cadastro_de_jogos():
     cadastro.lineEdit_2.clear()
     cadastro.radioButton.setChecked(False)
 
-def chama_lista_de_jogos():
+def chama_tela_lista_de_jogos():
     tela_lista_de_jogos.show()
+
+    cursor = banco_de_dados.cursor()
+
+
     
 app = QtWidgets.QApplication([])
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
 cadastro.pushButton_3.clicked.connect(cadastro_de_jogos)
-cadastro.pushButton_4.clicked.connect(chama_lista_de_jogos)
+cadastro.pushButton_4.clicked.connect(chama_tela_lista_de_jogos)
 
 sleep(1.5)
 cadastro.show()
