@@ -2,12 +2,18 @@ from PyQt5 import uic, QtWidgets
 import mysql.connector
 from time import sleep
 
+app = QtWidgets.QApplication([])
+
 banco_de_dados = mysql.connector.connect(    
     host='localhost',
     user='root',
     password='SENHA_DESEJADA',
     database='Estante_Virtual_de_Games_e_Plataformas'
 )
+
+tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
+tabela = tela_lista_de_jogos.tableWidget
+
 
 def cadastro_de_jogos():
     nome_do_jogo = cadastro.lineEdit.text()
@@ -44,7 +50,7 @@ def cadastro_de_jogos():
         plataforma = 'Outros'
 
     cursor = banco_de_dados.cursor()
-    inserir_no_SQL = "INSERT INTO Games (Nome_do_Jogo, Ano_Lancamento, Plataforma) VALUES (%s, %s, %s)"
+    inserir_no_SQL = "INSERT INTO Games (ID, Nome_do_Jogo, Ano_Lancamento, Plataforma) VALUES (%s, %s, %s)"
     jogos = (str(nome_do_jogo), str(ano_lancamento), plataforma)
     cursor.execute(inserir_no_SQL, jogos)
     banco_de_dados.commit()
@@ -61,11 +67,20 @@ def chama_tela_lista_de_jogos():
     cursor.execute(seleciona_a_tabela)
     dados_recebidos = cursor.fetchall()
 
-    tela_lista_de_jogos.tableWidget.setRowCount(len(dados_recebidos))
-    tela_lista_de_jogos.tableWidget.setColumnCount(4)
+    colunas = ['ID', 'Nome_do_Jogo', 'Ano_Lancamento', 'Plataforma']
+
+    tela_lista_de_jogos.tableWidget.setRowCount(len(dados_recebidos) + 1)
+    tela_lista_de_jogos.tableWidget.setColumnCount(len(colunas))
+
+    for j in range(len(colunas)):
+        tela_lista_de_jogos.tableWidget.setItem(0, j, QtWidgets.QTableWidgetItem(colunas[j]))
+
+    for i in range(len(dados_recebidos)):
+        for j in range(len(dados_recebidos[i])):
+            item = dados_recebidos[i][j] if j < len(dados_recebidos[i]) else ""
+            tela_lista_de_jogos.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(item)))
 
     
-app = QtWidgets.QApplication([])
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
 cadastro.pushButton_3.clicked.connect(cadastro_de_jogos)
