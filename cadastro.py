@@ -68,6 +68,11 @@ def chama_tela_lista_de_jogos():
 
     tela_lista_de_jogos.tableWidget.setRowCount(len(dados_recebidos))
     tela_lista_de_jogos.tableWidget.setColumnCount(4)
+
+    for i in range (0, len(dados_recebidos)):
+        for j in range(0, 4):
+            tela_lista_de_jogos.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str((dados_recebidos[i][j]))))
+
     
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
