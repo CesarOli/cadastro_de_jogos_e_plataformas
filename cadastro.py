@@ -66,6 +66,8 @@ def chama_tela_lista_de_jogos():
     cursor.execute(seleciona_a_tabela)
     dados_recebidos = cursor.fetchall()
 
+    tela_lista_de_jogos.tableWidget.setRowCount(len(dados_recebidos))
+    tela_lista_de_jogos.tableWidget.setColumnCount(4)
     
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
