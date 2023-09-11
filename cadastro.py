@@ -14,6 +14,8 @@ banco_de_dados = mysql.connector.connect(
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
 tabela = tela_lista_de_jogos.tableWidget
 
+
+
 def cadastro_de_jogos():
     nome_do_jogo = cadastro.lineEdit.text()
     ano_lancamento = cadastro.lineEdit_2.text()
@@ -49,7 +51,7 @@ def cadastro_de_jogos():
         plataforma = 'Outros'
 
     cursor = banco_de_dados.cursor()
-    inserir_no_SQL = "INSERT INTO Games (ID, Nome_do_Jogo, Ano_Lancamento, Plataforma) VALUES (%s, %s, %s)"
+    inserir_no_SQL = "INSERT INTO Games (Nome_do_Jogo, Ano_Lancamento, Plataforma) VALUES (%s, %s, %s)"
     jogos = (str(nome_do_jogo), str(ano_lancamento), plataforma)
     cursor.execute(inserir_no_SQL, jogos)
     banco_de_dados.commit()
@@ -58,26 +60,44 @@ def cadastro_de_jogos():
     cadastro.lineEdit_2.clear()
     cadastro.radioButton.setChecked(False)
 
+
 def chama_tela_lista_de_jogos():
     tela_lista_de_jogos.show()
 
     cursor = banco_de_dados.cursor()
-    seleciona_a_tabela = "SELECT * FROM  Games"
+    seleciona_a_tabela = "SELECT * FROM Games"
     cursor.execute(seleciona_a_tabela)
     dados_recebidos = cursor.fetchall()
 
+    num_colunas = len(cursor.description)
+
+    colunas = [desc[0] for desc in cursor.description]
+    tela_lista_de_jogos.tableWidget.setColumnCount(num_colunas)
+    tela_lista_de_jogos.tableWidget.setHorizontalHeaderLabels(colunas)
+
     tela_lista_de_jogos.tableWidget.setRowCount(len(dados_recebidos))
-    tela_lista_de_jogos.tableWidget.setColumnCount(4)
 
-    for i in range (0, len(dados_recebidos)):
-        for j in range(0, 4):
-            tela_lista_de_jogos.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str((dados_recebidos[i][j]))))
+    for i in range(len(dados_recebidos)):
+        for j in range(num_colunas):
+            item = dados_recebidos[i][j] if j < len(dados_recebidos[i]) else ""
+            tela_lista_de_jogos.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(item)))
 
-    
+def excluir_jogos():
+    linha = tela_lista_de_jogos.tableWidget.currentRow()
+    tela_lista_de_jogos.tableWidget.removeRow(linha)
+
+    cursor = banco_de_dados.cursor()
+    cursor.execute('SELECT id FROM Games')
+    dados_recebidos = cursor.fetchall()
+    id = dados_recebidos[linha][0]
+    cursor.execute('DELETE FROM Games WHERE id='+ str(id))
+
+
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
 cadastro.pushButton_3.clicked.connect(cadastro_de_jogos)
 cadastro.pushButton_4.clicked.connect(chama_tela_lista_de_jogos)
+tela_lista_de_jogos.pushButton.clicked.connect(excluir_jogos)
 
 sleep(1.5)
 cadastro.show()
