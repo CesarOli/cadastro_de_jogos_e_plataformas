@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>673</width>
-    <height>519</height>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -79,24 +79,73 @@
     <property name="styleSheet">
      <string notr="true">background-color: rgb(46, 182, 255);</string>
     </property>
+    <property name="gridStyle">
+     <enum>Qt::NoPen</enum>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>26</number>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>105</number>
+    </attribute>
+    <attribute name="horizontalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>true</bool>
+    </attribute>
     <column>
      <property name="text">
       <string>ID</string>
      </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Jogo</string>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Lançamento</string>
+      <string>Jogos</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Ano</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
      </property>
     </column>
     <column>
      <property name="text">
       <string>Plataforma</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
      </property>
     </column>
    </widget>
