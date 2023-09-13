@@ -158,6 +158,9 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 120, 79);</string>
+    </property>
     <property name="text">
      <string>Excluir Jogo</string>
     </property>
