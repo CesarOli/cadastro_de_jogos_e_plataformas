@@ -14,8 +14,6 @@ banco_de_dados = mysql.connector.connect(
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
 tabela = tela_lista_de_jogos.tableWidget
 
-
-
 def cadastro_de_jogos():
     nome_do_jogo = cadastro.lineEdit.text()
     ano_lancamento = cadastro.lineEdit_2.text()
@@ -84,7 +82,6 @@ def chama_tela_lista_de_jogos():
 
 def excluir_jogos():
     linha = tela_lista_de_jogos.tableWidget.currentRow()
-    print(linha)
     tela_lista_de_jogos.tableWidget.removeRow(linha)
 
     cursor = banco_de_dados.cursor()
@@ -93,13 +90,16 @@ def excluir_jogos():
     id = dados_recebidos[linha][0]
     cursor.execute('DELETE FROM Games WHERE id='+ str(id))
 
+def telinha_edicao_de_jogos():
+    tela_edicao_de_jogos.show()
 
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
-tela_edita_jogos = uic.loadUi('edita_jogos.ui')
+tela_edicao_de_jogos = uic.loadUi('edita_jogo.ui')
 cadastro.pushButton_3.clicked.connect(cadastro_de_jogos)
 cadastro.pushButton_4.clicked.connect(chama_tela_lista_de_jogos)
 tela_lista_de_jogos.pushButton.clicked.connect(excluir_jogos)
+tela_lista_de_jogos.pushButton_2.clicked.connect(telinha_edicao_de_jogos)
 
 
 sleep(1.5)
