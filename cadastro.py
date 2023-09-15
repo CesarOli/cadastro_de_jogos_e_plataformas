@@ -51,7 +51,7 @@ def cadastro_de_jogos():
         plataforma = 'Outros'
 
     cursor = banco_de_dados.cursor()
-    inserir_no_SQL = "INSERT INTO Games (Nome_do_Jogo, Ano_Lancamento, Plataforma) VALUES (%s, %s, %s)"
+    inserir_no_SQL = "INSERT INTO Games (Jogo, Ano, Plataforma) VALUES (%s, %s, %s)"
     jogos = (str(nome_do_jogo), str(ano_lancamento), plataforma)
     cursor.execute(inserir_no_SQL, jogos)
     banco_de_dados.commit()
@@ -84,6 +84,7 @@ def chama_tela_lista_de_jogos():
 
 def excluir_jogos():
     linha = tela_lista_de_jogos.tableWidget.currentRow()
+    print(linha)
     tela_lista_de_jogos.tableWidget.removeRow(linha)
 
     cursor = banco_de_dados.cursor()
@@ -95,9 +96,11 @@ def excluir_jogos():
 
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
+tela_edita_jogos = uic.loadUi('edita_jogos.ui')
 cadastro.pushButton_3.clicked.connect(cadastro_de_jogos)
 cadastro.pushButton_4.clicked.connect(chama_tela_lista_de_jogos)
 tela_lista_de_jogos.pushButton.clicked.connect(excluir_jogos)
+
 
 sleep(1.5)
 cadastro.show()
