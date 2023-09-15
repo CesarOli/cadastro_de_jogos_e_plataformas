@@ -49,7 +49,7 @@ def cadastro_de_jogos():
         plataforma = 'Outros'
 
     cursor = banco_de_dados.cursor()
-    inserir_no_SQL = "INSERT INTO Games (Jogo, Ano, Plataforma) VALUES (%s, %s, %s)"
+    inserir_no_SQL = "INSERT INTO Games (Nome, Ano, Plataforma) VALUES (%s, %s, %s)"
     jogos = (str(nome_do_jogo), str(ano_lancamento), plataforma)
     cursor.execute(inserir_no_SQL, jogos)
     banco_de_dados.commit()
