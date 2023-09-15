@@ -102,7 +102,43 @@
     </attribute>
     <column>
      <property name="text">
-      <string/>
+      <string>ID</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Nome</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Ano</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Plataforma</string>
      </property>
      <property name="font">
       <font>
