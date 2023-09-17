@@ -21,7 +21,7 @@ Neste projeto foram utilizadas as seguintes bibliotecas do Python:
 - mysql-connector-python: Para a conexão com o banco de dados MySQL.
 - time: Para adicionar pausas entre algumas operações.
 
-## O que pratiquei como como Desenvolvedor neste projeto
+## O que pratiquei como Desenvolvedor neste projeto
 
 Durante o desenvolvimento deste projeto, tive a oportunidade de praticar habilidades e conceitos importantes, sendo eles:
 
