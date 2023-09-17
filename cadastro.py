@@ -4,6 +4,8 @@ from time import sleep
 
 app = QtWidgets.QApplication([])
 
+id_games = 0 
+
 banco_de_dados = mysql.connector.connect(    
     host='localhost',
     user='root',
@@ -91,6 +93,8 @@ def excluir_jogos():
     cursor.execute('DELETE FROM Games WHERE id='+ str(id))
 
 def telinha_edicao_de_jogos():
+    
+    global id_games
 
     linha = tela_lista_de_jogos.tableWidget.currentRow()
 
@@ -101,12 +105,25 @@ def telinha_edicao_de_jogos():
     cursor.execute('SELECT * FROM Games WHERE id='+ str(id))
     jogo = cursor.fetchall()
     tela_edicao_de_jogos.show()
+    id_games = id
 
     tela_edicao_de_jogos.lineEdit.setText(str(jogo[0][0]))
     tela_edicao_de_jogos.lineEdit_2.setText(str(jogo[0][1]))
     tela_edicao_de_jogos.lineEdit_3.setText(str(jogo[0][2]))
     tela_edicao_de_jogos.lineEdit_4.setText(str(jogo[0][3]))
 
+def salvar_games_editados():
+    global id_games
+    nome = tela_edicao_de_jogos.lineEdit_2.text()
+    ano = tela_edicao_de_jogos.lineEdit_3.text()
+    plataforma = tela_edicao_de_jogos.lineEdit_4.text()
+    
+    # atualiza edição feita no banco de dados
+    cursor = banco_de_dados.cursor()
+    cursor.execute('UPDATE Games SET nome = "{}", ano = "{}", plataforma = "{}" WHERE id = {}'.format(nome, ano, plataforma, id_games))
+    tela_edicao_de_jogos.close()
+    chama_tela_lista_de_jogos() 
+     
 
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
@@ -115,7 +132,7 @@ cadastro.pushButton_3.clicked.connect(cadastro_de_jogos)
 cadastro.pushButton_4.clicked.connect(chama_tela_lista_de_jogos)
 tela_lista_de_jogos.pushButton.clicked.connect(excluir_jogos)
 tela_lista_de_jogos.pushButton_2.clicked.connect(telinha_edicao_de_jogos)
-
+tela_edicao_de_jogos.pushButton. clicked.connect(salvar_games_editados)
 
 sleep(1.5)
 cadastro.show()
