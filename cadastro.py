@@ -91,7 +91,22 @@ def excluir_jogos():
     cursor.execute('DELETE FROM Games WHERE id='+ str(id))
 
 def telinha_edicao_de_jogos():
+
+    linha = tela_lista_de_jogos.tableWidget.currentRow()
+
+    cursor = banco_de_dados.cursor()
+    cursor.execute('SELECT id FROM Games')
+    dados_recebidos = cursor.fetchall()
+    id = dados_recebidos[linha][0]
+    cursor.execute('SELECT * FROM Games WHERE id='+ str(id))
+    jogo = cursor.fetchall()
     tela_edicao_de_jogos.show()
+
+    tela_edicao_de_jogos.lineEdit.setText(str(jogo[0][0]))
+    tela_edicao_de_jogos.lineEdit_2.setText(str(jogo[0][1]))
+    tela_edicao_de_jogos.lineEdit_3.setText(str(jogo[0][2]))
+    tela_edicao_de_jogos.lineEdit_4.setText(str(jogo[0][3]))
+
 
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
