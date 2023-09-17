@@ -16,11 +16,14 @@ banco_de_dados = mysql.connector.connect(
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
 tabela = tela_lista_de_jogos.tableWidget
 
+
+#Função responsável por cadastro de jogos e suas informações
 def cadastro_de_jogos():
     nome_do_jogo = cadastro.lineEdit.text()
     ano_lancamento = cadastro.lineEdit_2.text()
     plataforma = ''
     
+    #Condicionais que verifica qual plataforma de jogo foi selecionada pelo usuário
     if cadastro.radioButton.isChecked():
         sleep(1)
         print('Nome do Jogo cadastrado: ', nome_do_jogo)
@@ -50,48 +53,57 @@ def cadastro_de_jogos():
         print('"Outros" foi a plataforma selecionada.')
         plataforma = 'Outros'
 
+
+    #Inseri jogos no banco de dados MySQL
     cursor = banco_de_dados.cursor()
     inserir_no_SQL = "INSERT INTO Games (Nome, Ano, Plataforma) VALUES (%s, %s, %s)"
     jogos = (str(nome_do_jogo), str(ano_lancamento), plataforma)
     cursor.execute(inserir_no_SQL, jogos)
     banco_de_dados.commit()
 
+    #Limpa os campos do formulário depois que o usuário clica em 'Enviar'
     cadastro.lineEdit.clear()
     cadastro.lineEdit_2.clear()
     cadastro.radioButton.setChecked(False)
 
 
+#Função responsável por exibir a lista de jogos cadastrados
 def chama_tela_lista_de_jogos():
     tela_lista_de_jogos.show()
 
+    #consulta jogos ba tabela Games do banco de dados
     cursor = banco_de_dados.cursor()
     seleciona_a_tabela = "SELECT * FROM Games"
     cursor.execute(seleciona_a_tabela)
     dados_recebidos = cursor.fetchall()
 
-    num_colunas = len(cursor.description)
 
+    #Configura a lista de jogos
+    num_colunas = len(cursor.description)
     colunas = [desc[0] for desc in cursor.description]
     tela_lista_de_jogos.tableWidget.setColumnCount(num_colunas)
     tela_lista_de_jogos.tableWidget.setHorizontalHeaderLabels(colunas)
-
     tela_lista_de_jogos.tableWidget.setRowCount(len(dados_recebidos))
 
+    #Preenche a tabela com as informações dos jogos
     for i in range(len(dados_recebidos)):
         for j in range(num_colunas):
             item = dados_recebidos[i][j] if j < len(dados_recebidos[i]) else ""
             tela_lista_de_jogos.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(item)))
 
+#Função responsável pela exclusao de jogos na listagem
 def excluir_jogos():
     linha = tela_lista_de_jogos.tableWidget.currentRow()
     tela_lista_de_jogos.tableWidget.removeRow(linha)
 
+    #Identifica o id a ser excluído
     cursor = banco_de_dados.cursor()
     cursor.execute('SELECT id FROM Games')
     dados_recebidos = cursor.fetchall()
     id = dados_recebidos[linha][0]
     cursor.execute('DELETE FROM Games WHERE id='+ str(id))
 
+#Função responsável por abrir tela para editar informaçoes dos jogos
 def telinha_edicao_de_jogos():
     
     global id_games
@@ -112,6 +124,7 @@ def telinha_edicao_de_jogos():
     tela_edicao_de_jogos.lineEdit_3.setText(str(jogo[0][2]))
     tela_edicao_de_jogos.lineEdit_4.setText(str(jogo[0][3]))
 
+#Função para salvar alterações nos jogos editados
 def salvar_games_editados():
     global id_games
     nome = tela_edicao_de_jogos.lineEdit_2.text()
@@ -124,16 +137,20 @@ def salvar_games_editados():
     tela_edicao_de_jogos.close()
     chama_tela_lista_de_jogos() 
      
-
+#Carregamento das interfaces gráficas
 cadastro = uic.loadUi('cadastro.ui')
 tela_lista_de_jogos = uic.loadUi('lista_de_jogos.ui')
 tela_edicao_de_jogos = uic.loadUi('edita_jogo.ui')
+
+
+#Conecta botões as funções
 cadastro.pushButton_3.clicked.connect(cadastro_de_jogos)
 cadastro.pushButton_4.clicked.connect(chama_tela_lista_de_jogos)
 tela_lista_de_jogos.pushButton.clicked.connect(excluir_jogos)
 tela_lista_de_jogos.pushButton_2.clicked.connect(telinha_edicao_de_jogos)
 tela_edicao_de_jogos.pushButton. clicked.connect(salvar_games_editados)
 
+#Inicia o aplicativo
 sleep(1.5)
 cadastro.show()
 app.exec()
